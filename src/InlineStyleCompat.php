@@ -67,13 +67,13 @@ final class InlineStyleCompat
      * @param null $context deprecated cannot be used anymore
      * @param string $basedir
      * @param array $devices
+     * @param boolean $keepStyles
      * @return array
      */
-    public function extractStylesheets($context, $basedir, $devices = array('all', 'screen', 'handheld'))
+    public function extractStylesheets($context, $basedir, $devices = array('all', 'screen', 'handheld'), $keepStyles = false)
     {
         $extractStyleSheets = new ExtractStyleSheets(
-            $basedir,
-            $devices
+            $basedir, $devices, $keepStyles
         );
 
         $this->document = $this->document->applyTransform($extractStyleSheets);

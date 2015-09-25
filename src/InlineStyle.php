@@ -47,8 +47,7 @@ final class InlineStyle
         $options = self::defaultOptions($options);
 
         $extractStyleSheets = new ExtractStyleSheets(
-            $options['baseUrl'],
-            $options['devices']
+            $options['baseUrl'], $options['devices'], $options['keepStyles']
         );
 
         $document = $document->applyTransform($extractStyleSheets);
@@ -70,7 +69,8 @@ final class InlineStyle
     {
         $defaultOptions = array(
             'baseUrl' => '',
-            'devices' => array('all', 'screen', 'handheld')
+            'devices' => array('all', 'screen', 'handheld'),
+            'keepStyles' => false
         );
         return array_replace($defaultOptions, $options);
     }

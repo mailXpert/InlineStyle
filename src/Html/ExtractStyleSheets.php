@@ -15,15 +15,19 @@ final class ExtractStyleSheets implements Transform
     private $devices;
     /** @type OrderedStyleSheet[] */
     private $styleSheets;
+    /** @type boolean */
+    private $keepStyle;
 
     /**
-     * @param string $base The base URI for relative stylesheets
-     * @param array $devices
+     * @param string  $base The base URI for relative stylesheets
+     * @param array   $devices
+     * @param boolean $keepStyle
      */
-    public function __construct($base, $devices = array('all', 'screen', 'handheld'))
+    public function __construct($base, $devices = array('all', 'screen', 'handheld'), $keepStyle = false)
     {
         $this->base = $base;
         $this->devices = $devices;
+        $this->keepStyle = $keepStyle;
         $this->styleSheets = array();
     }
 
@@ -75,9 +79,10 @@ final class ExtractStyleSheets implements Transform
                 $removeQueue[] = $node;
             }
         }
-
-        foreach ($removeQueue as $child) {
-            $child->parentNode->removeChild($child);
+        if (!$this->keepStyle) {
+            foreach ($removeQueue as $child) {
+                $child->parentNode->removeChild($child);
+            }
         }
 
         return $dom->saveHTML();

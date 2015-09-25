@@ -35,3 +35,4 @@ The options that can be passed to the inline method
 |------------------------------------|
 | devices | ['all', 'screen', 'handheld'] | allowed media devices, styles for other devices are ignored |
 | baseUrl | '' | relative links are relative to this url |
+| keepStyle | false | Allows you to keep the styles | 
